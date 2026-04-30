@@ -40,16 +40,19 @@
     --deep-green: 130 50% 8%;
     --copper: 19 47% 53%;
     --copper-glow: 30 60% 65%;
+    --gold: 42 78% 60%;
     --wood: 25 35% 22%;
 
     /* Gradients */
     --gradient-hero: linear-gradient(180deg, hsl(0 0% 0% / 0.2) 0%, hsl(0 0% 4% / 0.85) 100%);
     --gradient-copper: linear-gradient(135deg, hsl(var(--copper)), hsl(var(--copper-glow)));
+    --gradient-gold: linear-gradient(135deg, hsl(42 90% 70%), hsl(35 80% 50%));
     --gradient-radial-green: radial-gradient(ellipse at center, hsl(var(--deep-green)) 0%, hsl(var(--background)) 70%);
 
     /* Shadows / glows */
     --glow-neon: 0 0 8px hsl(var(--neon-pink) / 0.9), 0 0 24px hsl(var(--neon-pink) / 0.6), 0 0 60px hsl(var(--neon-pink) / 0.35);
     --glow-neon-soft: 0 0 12px hsl(var(--neon-pink) / 0.55), 0 0 40px hsl(var(--neon-pink) / 0.3);
+    --glow-gold: 0 0 14px hsl(var(--gold) / 0.7), 0 0 40px hsl(var(--gold) / 0.35);
     --shadow-elegant: 0 30px 80px -20px hsl(0 0% 0% / 0.7);
 
     --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
@@ -108,6 +111,36 @@
   .neon-flicker {
     animation: neon-flicker 6s infinite;
   }
+  .glass {
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.04), hsl(0 0% 100% / 0.01));
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+  .glass-strong {
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.02));
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+  }
+  .text-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ring-gold {
+    box-shadow: var(--glow-gold), inset 0 0 0 1px hsl(var(--gold));
+  }
+  .neon-pulse {
+    animation: neon-pulse 1.6s ease-out;
+  }
+}
+
+@keyframes neon-pulse {
+  0% { box-shadow: 0 0 0 hsl(var(--neon-pink) / 0); }
+  30% { box-shadow: 0 0 24px hsl(var(--neon-pink) / 0.9), inset 0 0 16px hsl(var(--neon-pink) / 0.4); }
+  100% { box-shadow: 0 0 0 hsl(var(--neon-pink) / 0); }
 }
 
 @keyframes neon-flicker {
