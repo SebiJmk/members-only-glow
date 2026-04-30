@@ -85,206 +85,213 @@ const Reserve = () => {
         </div>
       </section>
 
-      {/* Stack: Map → Info Card → Form */}
-      <section className="container mx-auto px-4 sm:px-6 space-y-6 md:space-y-8">
-        {/* MAP */}
-        <FloorMap
-          selected={selected}
-          onSelect={setSelected}
-          hovered={hovered}
-          onHover={setHovered}
-        />
+      {/* Two-column on desktop: map left, details right.  Stacked on mobile. */}
+      <section className="container mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] gap-10 lg:gap-14 items-start">
+          {/* LEFT — MAP + INFO PANEL */}
+          <div className="space-y-8 lg:space-y-10 min-w-0">
+            <FloorMap
+              selected={selected}
+              onSelect={setSelected}
+              hovered={hovered}
+              onHover={setHovered}
+            />
 
-        {/* INFO CARD — always visible, never overlaps the map */}
-        <article
-          className="glass rounded-2xl p-5 md:p-6 transition-all duration-500"
-          aria-live="polite"
-        >
-          {previewTable && previewZone ? (
-            <div className="flex flex-col sm:flex-row gap-5 items-stretch animate-fade-in">
-              <img
-                src={previewZone.image}
-                alt={previewZone.name}
-                width={280}
-                height={180}
-                loading="lazy"
-                className="h-40 sm:h-32 sm:w-44 w-full object-cover rounded-xl shrink-0"
-              />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-3 mb-1">
-                  <p
-                    className="text-[10px] uppercase tracking-[0.4em]"
-                    style={{ color: previewZone.stroke }}
-                  >
-                    {previewZone.name}
-                  </p>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/50">
-                    Seats {previewTable.seats}
-                  </span>
+            {/* INFO PANEL — sits below the map, well separated */}
+            <article
+              className="glass rounded-2xl p-6 md:p-8 transition-all duration-500"
+              aria-live="polite"
+            >
+              <p className="text-[10px] uppercase tracking-[0.4em] text-foreground/45 mb-4">
+                Table info
+              </p>
+              {previewTable && previewZone ? (
+                <div className="flex flex-col sm:flex-row gap-6 items-stretch animate-fade-in">
+                  <img
+                    src={previewZone.image}
+                    alt={previewZone.name}
+                    width={320}
+                    height={200}
+                    loading="lazy"
+                    className="h-44 sm:h-36 sm:w-48 w-full object-cover rounded-xl shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-3 mb-1">
+                      <p
+                        className="text-[10px] uppercase tracking-[0.4em]"
+                        style={{ color: previewZone.stroke }}
+                      >
+                        {previewZone.name}
+                      </p>
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+                        Seats {previewTable.seats}
+                      </span>
+                    </div>
+                    <h2 className="font-display text-2xl md:text-3xl text-gold mb-2">
+                      {previewTable.title}
+                    </h2>
+                    <p className="text-sm text-foreground/70 leading-relaxed">
+                      {previewZone.description}
+                    </p>
+                    {selected === previewTable.id && (
+                      <p className="mt-3 text-[10px] uppercase tracking-[0.4em] text-gold">
+                        ✦ Held for your reservation
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <h2 className="font-display text-2xl md:text-3xl text-gold mb-2">
-                  {previewTable.title}
-                </h2>
-                <p className="text-sm text-foreground/70 leading-relaxed">
-                  {previewZone.description}
+              ) : (
+                <p className="text-foreground/55 text-sm">
+                  Hover or tap a table to see its vibe.
                 </p>
-                {selected === previewTable.id && (
-                  <p className="mt-3 text-[10px] uppercase tracking-[0.4em] text-gold">
-                    ✦ Held for your reservation
+              )}
+            </article>
+          </div>
+
+          {/* RIGHT — RESERVATION FORM (sticky on desktop) */}
+          <aside className="lg:sticky lg:top-28 mt-16 lg:mt-0 w-full max-w-lg lg:max-w-none mx-auto">
+            <form
+              onSubmit={onSubmit}
+              className="glass-strong rounded-2xl p-7 md:p-10 space-y-6 w-full"
+              style={{ borderColor: "hsl(var(--gold) / 0.18)" }}
+            >
+              <div className="flex items-center justify-between flex-wrap gap-3">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.5em] text-copper mb-1">
+                    Booking
                   </p>
+                  <h2 className="font-display text-2xl md:text-3xl">Your details</h2>
+                </div>
+                {selected && (
+                  <button
+                    type="button"
+                    onClick={() => setSelected(null)}
+                    className="text-[10px] uppercase tracking-[0.3em] text-foreground/50 hover:text-neon-soft inline-flex items-center gap-1 transition"
+                  >
+                    <X className="h-3 w-3" /> Clear
+                  </button>
                 )}
               </div>
-            </div>
-          ) : (
-            <div className="text-center py-3">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-foreground/40 mb-1">
-                Info card
-              </p>
-              <p className="text-foreground/55 text-sm">
-                Hover or tap a table to see its vibe.
-              </p>
-            </div>
-          )}
-        </article>
 
-        {/* FORM */}
-        <form
-          onSubmit={onSubmit}
-          className="glass-strong rounded-2xl p-6 md:p-10 space-y-5 max-w-3xl mx-auto w-full"
-          style={{ borderColor: "hsl(var(--gold) / 0.15)" }}
-        >
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <h2 className="font-display text-2xl md:text-3xl">Your details</h2>
-            {selected && (
+              {/* Selected table indicator */}
+              <div
+                className="rounded-xl px-4 py-3.5 text-sm flex items-center justify-between transition-all"
+                style={{
+                  border: selected
+                    ? "1px solid hsl(var(--gold) / 0.7)"
+                    : "1px dashed hsl(var(--border))",
+                  boxShadow: selected ? "var(--glow-gold)" : undefined,
+                  background: selected ? "hsl(var(--gold) / 0.06)" : "transparent",
+                }}
+              >
+                <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/55">
+                  Selected table
+                </span>
+                <span
+                  className={
+                    selected ? "text-gold font-display text-xl" : "text-foreground/40"
+                  }
+                >
+                  {selected ?? "— none —"}
+                </span>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Field name="name" label="Name" type="text" required maxLength={80} />
+                <Field name="phone" label="Phone" type="tel" required maxLength={30} />
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <Field name="date" label="Date" type="date" required />
+                <Field name="time" label="Time" type="time" required />
+                <Field
+                  name="guests"
+                  label="Guests"
+                  type="number"
+                  defaultValue={2}
+                  min={1}
+                  max={20}
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="notes"
+                  className="block text-[10px] uppercase tracking-[0.4em] text-foreground/60 mb-2"
+                >
+                  Notes
+                </label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  rows={3}
+                  maxLength={500}
+                  className="w-full bg-transparent border px-4 py-3 text-foreground placeholder:text-foreground/30 transition rounded-lg focus:outline-none"
+                  style={{ borderColor: "hsl(var(--gold) / 0.3)" }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--gold) / 0.7)";
+                    e.currentTarget.style.boxShadow = "var(--glow-gold)";
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--gold) / 0.3)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                  placeholder="Allergies, occasion, seating preference…"
+                />
+              </div>
+
               <button
-                type="button"
-                onClick={() => setSelected(null)}
-                className="text-[10px] uppercase tracking-[0.3em] text-foreground/50 hover:text-neon-soft inline-flex items-center gap-1 transition"
+                type="submit"
+                disabled={submitting || !selected}
+                className="w-full rounded-full px-8 py-4 text-sm font-medium tracking-[0.35em] uppercase transition-all duration-500 disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{
+                  background: selected
+                    ? "var(--gradient-gold)"
+                    : "hsl(0 0% 100% / 0.04)",
+                  color: selected ? "hsl(0 0% 7%)" : "hsl(0 0% 100% / 0.5)",
+                  border: "1px solid hsl(var(--gold) / 0.6)",
+                  boxShadow: selected ? "var(--glow-gold)" : undefined,
+                }}
               >
-                <X className="h-3 w-3" /> Clear table
+                {submitting ? "Sending…" : "Reserve table"}
               </button>
-            )}
-          </div>
 
-          {/* Selected table indicator */}
-          <div
-            className="rounded-xl px-4 py-3 text-sm flex items-center justify-between transition-all"
-            style={{
-              border: selected
-                ? "1px solid hsl(var(--gold) / 0.7)"
-                : "1px dashed hsl(var(--border))",
-              boxShadow: selected ? "var(--glow-gold)" : undefined,
-              background: selected ? "hsl(var(--gold) / 0.06)" : "transparent",
-            }}
-          >
-            <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/55">
-              Selected table
-            </span>
-            <span
-              className={
-                selected ? "text-gold font-display text-xl" : "text-foreground/40"
-              }
-            >
-              {selected ?? "— none —"}
-            </span>
-          </div>
+              <div className="hairline" />
 
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Field name="name" label="Name" type="text" required maxLength={80} />
-            <Field name="phone" label="Phone" type="tel" required maxLength={30} />
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <Field name="date" label="Date" type="date" required />
-            <Field name="time" label="Time" type="time" required />
-            <Field
-              name="guests"
-              label="Guests"
-              type="number"
-              defaultValue={2}
-              min={1}
-              max={20}
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="notes"
-              className="block text-[10px] uppercase tracking-[0.4em] text-foreground/60 mb-2"
-            >
-              Notes
-            </label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows={3}
-              maxLength={500}
-              className="w-full bg-transparent border px-4 py-3 text-foreground placeholder:text-foreground/30 transition rounded-lg focus:outline-none"
-              style={{
-                borderColor: "hsl(var(--gold) / 0.3)",
-              }}
-              onFocus={(e) => {
-                e.currentTarget.style.borderColor = "hsl(var(--gold) / 0.7)";
-                e.currentTarget.style.boxShadow = "var(--glow-gold)";
-              }}
-              onBlur={(e) => {
-                e.currentTarget.style.borderColor = "hsl(var(--gold) / 0.3)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-              placeholder="Allergies, occasion, seating preference…"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={submitting || !selected}
-            className="w-full rounded-full px-8 py-4 text-sm font-medium tracking-[0.35em] uppercase transition-all duration-500 disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{
-              background: selected
-                ? "var(--gradient-gold)"
-                : "hsl(0 0% 100% / 0.04)",
-              color: selected ? "hsl(0 0% 7%)" : "hsl(0 0% 100% / 0.5)",
-              border: "1px solid hsl(var(--gold) / 0.6)",
-              boxShadow: selected ? "var(--glow-gold)" : undefined,
-            }}
-          >
-            {submitting ? "Sending…" : "Reserve table"}
-          </button>
-
-          <div className="hairline" />
-
-          <ul className="text-xs text-foreground/60 space-y-2.5">
-            <li className="flex items-center gap-3">
-              <MapPin className="h-4 w-4 text-copper" />
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=str.+Nicolae+G.+Caramfil+74A,+Bucharest"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-neon-soft"
-              >
-                str. Nicolae G. Caramfil 74A, Bucharest
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Phone className="h-4 w-4 text-copper" />
-              <a href="tel:+40700000000" className="hover:text-neon-soft">
-                +40 700 000 000
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Instagram className="h-4 w-4 text-copper" />
-              <a
-                href="https://instagram.com/membersonly"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-neon-soft"
-              >
-                @membersonly
-              </a>
-            </li>
-          </ul>
-        </form>
+              <ul className="text-xs text-foreground/60 space-y-2.5">
+                <li className="flex items-center gap-3">
+                  <MapPin className="h-4 w-4 text-copper" />
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=str.+Nicolae+G.+Caramfil+74A,+Bucharest"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-neon-soft"
+                  >
+                    str. Nicolae G. Caramfil 74A, Bucharest
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="h-4 w-4 text-copper" />
+                  <a href="tel:+40700000000" className="hover:text-neon-soft">
+                    +40 700 000 000
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Instagram className="h-4 w-4 text-copper" />
+                  <a
+                    href="https://instagram.com/membersonly"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-neon-soft"
+                  >
+                    @membersonly
+                  </a>
+                </li>
+              </ul>
+            </form>
+          </aside>
+        </div>
       </section>
 
       <Footer />
