@@ -1,4 +1,5 @@
 import hero from "@/assets/hero-exterior.jpg";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   return (
@@ -29,9 +30,9 @@ export const Hero = () => {
           str. Nicolae G. Caramfil 74A · Bucharest
         </address>
         <div className="mt-12">
-          <a href="#reserve" className="btn-neon">
+          <Link to="/reserve" className="btn-neon rounded-full">
             Reserve your place
-          </a>
+          </Link>
         </div>
       </div>
 

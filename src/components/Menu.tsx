@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const categories = [
   {
     title: "Premium Shisha",
@@ -42,9 +44,9 @@ export const Menu = () => {
         </div>
 
         <div className="text-center mt-20">
-          <a href="#reserve" className="btn-neon">
+          <Link to="/menu" className="btn-neon rounded-full">
             Explore all options
-          </a>
+          </Link>
         </div>
       </div>
     </section>
