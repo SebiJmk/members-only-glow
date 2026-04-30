@@ -42,7 +42,7 @@ const Menu = () => {
   const cat = menuData[active];
 
   return (
-    <main className="min-h-screen bg-background text-foreground pb-32">
+    <main className="min-h-screen bg-background text-foreground pb-safe-nav">
       <Navbar />
 
       {/* Hero header */}
