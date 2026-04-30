@@ -74,9 +74,9 @@ export const tables: Table[] = [
   { id: "V2", zone: "vip", label: "V2", title: "VIP V2 — Premium Booth", seats: 6, cx: 690, cy: 330 },
   { id: "V3", zone: "vip", label: "V3", title: "VIP V3 — Premium Booth", seats: 6, cx: 690, cy: 425 },
 
-  // Copper Bar — bottom
-  { id: "C1", zone: "bar", label: "C1", title: "Bar Seat C1", seats: 2, cx: 170, cy: 525 },
-  { id: "C2", zone: "bar", label: "C2", title: "Bar Seat C2", seats: 2, cx: 290, cy: 525 },
-  { id: "C3", zone: "bar", label: "C3", title: "Bar Seat C3", seats: 2, cx: 410, cy: 525 },
-  { id: "C4", zone: "bar", label: "C4", title: "Bar Seat C4", seats: 2, cx: 530, cy: 525 },
+  // Copper Bar — stools tucked under the curved counter
+  { id: "C1", zone: "bar", label: "C1", title: "Bar Seat C1", seats: 2, cx: 180, cy: 555 },
+  { id: "C2", zone: "bar", label: "C2", title: "Bar Seat C2", seats: 2, cx: 320, cy: 545 },
+  { id: "C3", zone: "bar", label: "C3", title: "Bar Seat C3", seats: 2, cx: 480, cy: 545 },
+  { id: "C4", zone: "bar", label: "C4", title: "Bar Seat C4", seats: 2, cx: 620, cy: 555 },
 ];
