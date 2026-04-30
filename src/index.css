@@ -40,16 +40,19 @@
     --deep-green: 130 50% 8%;
     --copper: 19 47% 53%;
     --copper-glow: 30 60% 65%;
+    --gold: 42 78% 60%;
     --wood: 25 35% 22%;
 
     /* Gradients */
     --gradient-hero: linear-gradient(180deg, hsl(0 0% 0% / 0.2) 0%, hsl(0 0% 4% / 0.85) 100%);
     --gradient-copper: linear-gradient(135deg, hsl(var(--copper)), hsl(var(--copper-glow)));
+    --gradient-gold: linear-gradient(135deg, hsl(42 90% 70%), hsl(35 80% 50%));
     --gradient-radial-green: radial-gradient(ellipse at center, hsl(var(--deep-green)) 0%, hsl(var(--background)) 70%);
 
     /* Shadows / glows */
     --glow-neon: 0 0 8px hsl(var(--neon-pink) / 0.9), 0 0 24px hsl(var(--neon-pink) / 0.6), 0 0 60px hsl(var(--neon-pink) / 0.35);
     --glow-neon-soft: 0 0 12px hsl(var(--neon-pink) / 0.55), 0 0 40px hsl(var(--neon-pink) / 0.3);
+    --glow-gold: 0 0 14px hsl(var(--gold) / 0.7), 0 0 40px hsl(var(--gold) / 0.35);
     --shadow-elegant: 0 30px 80px -20px hsl(0 0% 0% / 0.7);
 
     --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
