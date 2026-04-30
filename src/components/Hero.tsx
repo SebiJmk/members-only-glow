@@ -20,7 +20,7 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-background/40" />
 
       <div className="relative z-10 text-center px-6 animate-fade-up">
-        <p className="text-xs md:text-sm uppercase tracking-[0.5em] text-copper mb-6">
+        <p className="text-xs md:text-sm uppercase tracking-[0.5em] text-primary mb-6">
           Exclusivity is a lifestyle
         </p>
         <h1 className="font-display text-6xl sm:text-7xl md:text-9xl uppercase tracking-[0.08em] text-neon neon-flicker">

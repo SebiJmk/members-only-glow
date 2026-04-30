@@ -34,7 +34,7 @@ export const Navbar = () => {
             style={{ filter: "drop-shadow(0 0 6px hsl(var(--copper) / 0.4))" }}
           />
           <span className="font-display text-lg tracking-[0.35em] uppercase">
-            <span className="text-copper">Members</span>{" "}
+            <span className="text-primary">Members</span>{" "}
             <span className="text-foreground/90">Only</span>
           </span>
         </Link>

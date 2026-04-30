@@ -75,7 +75,7 @@ const Reserve = () => {
       {/* Title */}
       <section className="container mx-auto px-6 pt-32 md:pt-40 pb-10 md:pb-14">
         <div className="max-w-3xl">
-          <p className="text-xs uppercase tracking-[0.5em] text-copper mb-5">The Gates</p>
+          <p className="text-xs uppercase tracking-[0.5em] text-primary mb-5">The Gates</p>
           <h1 className="font-display text-5xl md:text-7xl leading-[1.05]">
             Choose your <em className="text-neon-soft not-italic">table.</em>
           </h1>
@@ -157,7 +157,7 @@ const Reserve = () => {
             >
               <div className="flex items-center justify-between flex-wrap gap-3">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.5em] text-copper mb-1">
+                  <p className="text-[10px] uppercase tracking-[0.5em] text-primary mb-1">
                     Booking
                   </p>
                   <h2 className="font-display text-2xl md:text-3xl">Your details</h2>
@@ -261,7 +261,7 @@ const Reserve = () => {
 
               <ul className="text-xs text-foreground/60 space-y-2.5">
                 <li className="flex items-center gap-3">
-                  <MapPin className="h-4 w-4 text-copper" />
+                  <MapPin className="h-4 w-4 text-primary" />
                   <a
                     href="https://www.google.com/maps/search/?api=1&query=str.+Nicolae+G.+Caramfil+74A,+Bucharest"
                     target="_blank"
@@ -272,13 +272,13 @@ const Reserve = () => {
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-copper" />
+                  <Phone className="h-4 w-4 text-primary" />
                   <a href="tel:+40700000000" className="hover:text-neon-soft">
                     +40 700 000 000
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Instagram className="h-4 w-4 text-copper" />
+                  <Instagram className="h-4 w-4 text-primary" />
                   <a
                     href="https://instagram.com/membersonly"
                     target="_blank"

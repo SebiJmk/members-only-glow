@@ -86,7 +86,7 @@
     color: hsl(var(--neon-pink));
     text-shadow: var(--glow-neon-soft);
   }
-  .text-copper {
+  .text-primary {
     background: var(--gradient-copper);
     -webkit-background-clip: text;
     background-clip: text;

@@ -6,7 +6,7 @@ export const Footer = () => (
       <div className="flex items-center gap-3">
         <img src={gorilla} alt="" width={28} height={28} className="h-7 w-7 opacity-80" loading="lazy" />
         <span className="font-display tracking-[0.35em] uppercase text-sm">
-          <span className="text-copper">Members</span> Only
+          <span className="text-primary">Members</span> Only
         </span>
       </div>
       <p className="text-[11px] uppercase tracking-[0.35em] text-foreground/50">
@@ -16,7 +16,7 @@ export const Footer = () => (
         href="https://vantagdigital.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[10px] uppercase tracking-[0.4em] text-foreground/40 hover:text-copper transition-colors"
+        className="text-[10px] uppercase tracking-[0.4em] text-foreground/40 hover:text-primary transition-colors"
       >
         Powered by Vantag Digital
       </a>
