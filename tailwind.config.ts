@@ -50,6 +50,7 @@ export default {
         neon: "hsl(var(--neon-pink))",
         copper: "hsl(var(--copper))",
         "copper-glow": "hsl(var(--copper-glow))",
+        gold: "hsl(var(--gold))",
         "deep-green": "hsl(var(--deep-green))",
         wood: "hsl(var(--wood))",
       },
