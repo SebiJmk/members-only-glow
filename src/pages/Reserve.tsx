@@ -67,7 +67,7 @@ const Reserve = () => {
 
   return (
     <main
-      className="min-h-screen text-foreground pb-32"
+      className="min-h-screen text-foreground pb-safe-nav"
       style={{ background: "#050505" }}
     >
       <Navbar />
