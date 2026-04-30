@@ -5,7 +5,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { Footer } from "@/components/Footer";
 
 const accentClass = (a: MenuCategory["accent"]) =>
-  a === "neon" ? "text-neon-soft" : a === "gold" ? "text-gold" : "text-copper";
+  a === "neon" ? "text-neon-soft" : a === "gold" ? "text-gold" : "text-primary";
 
 const Menu = () => {
   const [active, setActive] = useState(0);
@@ -59,7 +59,7 @@ const Menu = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/40 to-background" />
         <div className="relative z-10 container mx-auto px-6 h-full flex flex-col justify-end pb-12 md:pb-16">
-          <p className="text-xs uppercase tracking-[0.5em] text-copper mb-4">The Menu</p>
+          <p className="text-xs uppercase tracking-[0.5em] text-primary mb-4">The Menu</p>
           <h1 className={`font-display text-5xl md:text-7xl uppercase tracking-[0.04em] ${accentClass(cat.accent)}`}>
             {cat.label}
           </h1>

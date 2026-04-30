@@ -22,7 +22,7 @@ export const Reserve = () => {
     <section id="reserve" className="relative py-32 md:py-48">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mb-20">
-          <p className="text-xs uppercase tracking-[0.5em] text-copper mb-5">The Gates</p>
+          <p className="text-xs uppercase tracking-[0.5em] text-primary mb-5">The Gates</p>
           <h2 className="font-display text-5xl md:text-7xl leading-[1.05]">
             Reserve your <em className="text-neon-soft not-italic">place.</em>
           </h2>
@@ -61,7 +61,7 @@ export const Reserve = () => {
           <div className="space-y-10">
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <MapPin className="h-5 w-5 text-copper mt-1 shrink-0" />
+                <MapPin className="h-5 w-5 text-primary mt-1 shrink-0" />
                 <address className="not-italic">
                   <a
                     href="https://www.google.com/maps/search/?api=1&query=str.+Nicolae+G.+Caramfil+74A,+Bucharest"
@@ -76,13 +76,13 @@ export const Reserve = () => {
                 </address>
               </div>
               <div className="flex items-center gap-4">
-                <Phone className="h-5 w-5 text-copper shrink-0" />
+                <Phone className="h-5 w-5 text-primary shrink-0" />
                 <a href="tel:+40700000000" className="hover:text-neon-soft transition-colors">
                   +40 700 000 000
                 </a>
               </div>
               <div className="flex items-center gap-4">
-                <Instagram className="h-5 w-5 text-copper shrink-0" />
+                <Instagram className="h-5 w-5 text-primary shrink-0" />
                 <a
                   href="https://instagram.com/membersonly"
                   target="_blank"

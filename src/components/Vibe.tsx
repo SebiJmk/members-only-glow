@@ -6,7 +6,7 @@ export const Vibe = () => {
     <section id="vibe" className="relative py-32 md:py-48">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mb-24">
-          <p className="text-xs uppercase tracking-[0.5em] text-copper mb-5">The Vibe</p>
+          <p className="text-xs uppercase tracking-[0.5em] text-primary mb-5">The Vibe</p>
           <h2 className="font-display text-5xl md:text-7xl leading-[1.05]">
             A refined interior <em className="text-neon-soft not-italic">sanctuary.</em>
           </h2>

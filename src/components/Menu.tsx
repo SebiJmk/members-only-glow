@@ -20,7 +20,7 @@ export const Menu = () => {
     <section id="menu" className="relative py-32 md:py-48 bg-secondary/40">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <p className="text-xs uppercase tracking-[0.5em] text-copper mb-5">The Menu</p>
+          <p className="text-xs uppercase tracking-[0.5em] text-primary mb-5">The Menu</p>
           <h2 className="font-display text-5xl md:text-7xl leading-[1.05]">
             A short list, <em className="text-neon-soft not-italic">done well.</em>
           </h2>
@@ -32,7 +32,7 @@ export const Menu = () => {
               key={c.title}
               className="bg-background/80 p-10 md:p-12 group hover:bg-background transition-colors duration-500"
             >
-              <div className="text-copper text-xs tracking-[0.4em] uppercase mb-8">
+              <div className="text-primary text-xs tracking-[0.4em] uppercase mb-8">
                 · 0{categories.indexOf(c) + 1}
               </div>
               <h3 className="font-display text-3xl md:text-4xl uppercase tracking-wider mb-6 group-hover:text-neon-soft transition-colors duration-500">
