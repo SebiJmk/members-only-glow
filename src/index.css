@@ -111,6 +111,36 @@
   .neon-flicker {
     animation: neon-flicker 6s infinite;
   }
+  .glass {
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.04), hsl(0 0% 100% / 0.01));
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+  .glass-strong {
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.02));
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+  }
+  .text-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ring-gold {
+    box-shadow: var(--glow-gold), inset 0 0 0 1px hsl(var(--gold));
+  }
+  .neon-pulse {
+    animation: neon-pulse 1.6s ease-out;
+  }
+}
+
+@keyframes neon-pulse {
+  0% { box-shadow: 0 0 0 hsl(var(--neon-pink) / 0); }
+  30% { box-shadow: 0 0 24px hsl(var(--neon-pink) / 0.9), inset 0 0 16px hsl(var(--neon-pink) / 0.4); }
+  100% { box-shadow: 0 0 0 hsl(var(--neon-pink) / 0); }
 }
 
 @keyframes neon-flicker {
