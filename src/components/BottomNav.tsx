@@ -10,7 +10,10 @@ const items = [
 export const BottomNav = () => (
   <nav
     aria-label="Primary"
-    className="fixed bottom-3 inset-x-3 z-50 md:bottom-5 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-auto"
+    className="fixed inset-x-3 z-50 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-auto"
+    style={{
+      bottom: "max(0.75rem, env(safe-area-inset-bottom))",
+    }}
   >
     <ul className="glass-strong rounded-full flex items-center justify-around md:gap-2 px-2 py-2 shadow-elegant">
       {items.map(({ to, label, Icon }) => (
