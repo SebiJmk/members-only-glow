@@ -349,17 +349,17 @@ const TableNode = ({
         {renderIcon(table.zone, selected)}
       </g>
 
-      {/* Label — only thing that "lifts" on selection */}
+      {/* Label — small, centered, fixed in place (does not move on hover/select) */}
       <text
         textAnchor="middle"
+        y={4}
         fontSize="13"
         fontWeight={700}
         fill={selected ? "hsl(42 95% 75%)" : "hsl(0 0% 100% / 0.9)"}
         style={{
           pointerEvents: "none",
           letterSpacing: "1px",
-          transform: selected ? "translateY(-2px)" : "translateY(4px)",
-          transition: "transform 220ms cubic-bezier(0.22, 1, 0.36, 1), fill 220ms ease",
+          transition: "fill 220ms ease",
         }}
       >
         {table.label}
