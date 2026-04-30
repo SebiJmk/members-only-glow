@@ -1,72 +1,82 @@
 import vibeNeon from "@/assets/vibe-neon.jpg";
 import vibeBonsai from "@/assets/vibe-bonsai.jpg";
 
+export type ZoneId = "neon" | "bonsai" | "vip" | "bar";
+
 export type Zone = {
-  id: "bonsai" | "neon" | "vip" | "bar";
+  id: ZoneId;
   name: string;
   description: string;
   image: string;
+  stroke: string;     // hsl
+  glow: string;       // shadow color
 };
 
 export type Table = {
   id: string;
-  zone: Zone["id"];
+  zone: ZoneId;
   label: string;
+  title: string;       // "Neon Couch N1"
   seats: number;
-  // SVG layout (viewBox 0 0 600 400)
-  shape: "circle" | "rect";
-  x: number;
-  y: number;
-  w?: number;
-  h?: number;
-  r?: number;
+  // SVG layout (viewBox 0 0 800 600)
+  cx: number;          // center x
+  cy: number;          // center y
 };
 
-export const zones: Record<Zone["id"], Zone> = {
-  bonsai: {
-    id: "bonsai",
-    name: "The Bonsai Area",
-    description: "Around the backlit olive tree — the calm, luminous heart of the lounge.",
-    image: vibeBonsai,
-  },
+export const zones: Record<ZoneId, Zone> = {
   neon: {
     id: "neon",
     name: "Neon Lounge",
-    description: "Beneath the pink Members Only sign, framed by warm wood paneling.",
+    description: "Beneath the pink Members Only sign, framed by warm wood. Long curved couches, low light.",
     image: vibeNeon,
+    stroke: "hsl(338 100% 62%)",
+    glow: "hsl(338 100% 62% / 0.55)",
+  },
+  bonsai: {
+    id: "bonsai",
+    name: "The Bonsai",
+    description: "Three round tables circling the backlit olive bonsai. The luminous heart of the room.",
+    image: vibeBonsai,
+    stroke: "hsl(42 80% 65%)",
+    glow: "hsl(42 90% 65% / 0.55)",
   },
   vip: {
     id: "vip",
     name: "VIP Red Velvet",
-    description: "Premium booths in deep red velvet — the most private corner of the room.",
+    description: "Plush red velvet booths in the most private corner of the lounge.",
     image: vibeNeon,
+    stroke: "hsl(0 100% 27%)",          // #8B0000
+    glow: "hsl(0 100% 50% / 0.45)",
   },
   bar: {
     id: "bar",
     name: "Copper Bar",
-    description: "High seating along the bar, under the copper pendant lights.",
+    description: "High seating along the bar, beneath the copper pendant lights.",
     image: vibeNeon,
+    stroke: "hsl(19 47% 53%)",          // #C07851
+    glow: "hsl(19 70% 55% / 0.5)",
   },
 };
 
 export const tables: Table[] = [
-  // Bonsai area (center)
-  { id: "B1", zone: "bonsai", label: "B1", seats: 4, shape: "circle", x: 300, y: 200, r: 26 },
-  { id: "B2", zone: "bonsai", label: "B2", seats: 2, shape: "circle", x: 230, y: 240, r: 20 },
-  { id: "B3", zone: "bonsai", label: "B3", seats: 2, shape: "circle", x: 370, y: 240, r: 20 },
+  // Neon Lounge — long curved couches across the top
+  { id: "N1", zone: "neon", label: "N1", title: "Neon Couch N1", seats: 6, cx: 170, cy: 95 },
+  { id: "N2", zone: "neon", label: "N2", title: "Neon Couch N2", seats: 6, cx: 400, cy: 95 },
+  { id: "N3", zone: "neon", label: "N3", title: "Neon Couch N3", seats: 6, cx: 630, cy: 95 },
 
-  // Neon lounge (top wall)
-  { id: "N1", zone: "neon", label: "N1", seats: 4, shape: "rect", x: 90, y: 60, w: 90, h: 40 },
-  { id: "N2", zone: "neon", label: "N2", seats: 4, shape: "rect", x: 220, y: 60, w: 90, h: 40 },
-  { id: "N3", zone: "neon", label: "N3", seats: 4, shape: "rect", x: 350, y: 60, w: 90, h: 40 },
+  // Bonsai — perfect triangle around center (400, 320)
+  { id: "B1", zone: "bonsai", label: "B1", title: "Bonsai Table B1", seats: 4, cx: 400, cy: 215 }, // top
+  { id: "B2", zone: "bonsai", label: "B2", title: "Bonsai Table B2", seats: 4, cx: 305, cy: 380 }, // bottom-left
+  { id: "B3", zone: "bonsai", label: "B3", title: "Bonsai Table B3", seats: 4, cx: 495, cy: 380 }, // bottom-right
 
-  // VIP red velvet (right side)
-  { id: "V1", zone: "vip", label: "V1", seats: 6, shape: "rect", x: 480, y: 130, w: 80, h: 60 },
-  { id: "V2", zone: "vip", label: "V2", seats: 6, shape: "rect", x: 480, y: 220, w: 80, h: 60 },
+  // VIP Red Velvet — right side
+  { id: "V1", zone: "vip", label: "V1", title: "VIP V1 — Premium Booth", seats: 6, cx: 690, cy: 235 },
+  { id: "V2", zone: "vip", label: "V2", title: "VIP V2 — Premium Booth", seats: 6, cx: 690, cy: 330 },
+  { id: "V3", zone: "vip", label: "V3", title: "VIP V3 — Premium Booth", seats: 6, cx: 690, cy: 425 },
 
-  // Bar (bottom)
-  { id: "C1", zone: "bar", label: "C1", seats: 2, shape: "circle", x: 130, y: 340, r: 18 },
-  { id: "C2", zone: "bar", label: "C2", seats: 2, shape: "circle", x: 200, y: 340, r: 18 },
-  { id: "C3", zone: "bar", label: "C3", seats: 2, shape: "circle", x: 270, y: 340, r: 18 },
-  { id: "C4", zone: "bar", label: "C4", seats: 2, shape: "circle", x: 340, y: 340, r: 18 },
+  // Copper Bar — bottom
+  { id: "C1", zone: "bar", label: "C1", title: "Bar Seat C1", seats: 2, cx: 170, cy: 525 },
+  { id: "C2", zone: "bar", label: "C2", title: "Bar Seat C2", seats: 2, cx: 290, cy: 525 },
+  { id: "C3", zone: "bar", label: "C3", title: "Bar Seat C3", seats: 2, cx: 410, cy: 525 },
+  { id: "C4", zone: "bar", label: "C4", title: "Bar Seat C4", seats: 2, cx: 530, cy: 525 },
 ];
