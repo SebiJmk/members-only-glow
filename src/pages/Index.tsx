@@ -2,7 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Vibe } from "@/components/Vibe";
 import { Menu } from "@/components/Menu";
-import { Reserve } from "@/components/Reserve";
+import { ReserveCTA } from "@/components/ReserveCTA";
 import { Footer } from "@/components/Footer";
 import { BottomNav } from "@/components/BottomNav";
 
@@ -13,7 +13,7 @@ const Index = () => {
       <Hero />
       <Vibe />
       <Menu />
-      <Reserve />
+      <ReserveCTA />
       <Footer />
       <BottomNav />
     </main>
