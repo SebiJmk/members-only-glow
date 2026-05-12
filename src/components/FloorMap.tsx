@@ -188,9 +188,9 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
     {/* Header */}
     <div className="flex items-center justify-between gap-3 px-2 mb-3 flex-wrap">
       <p className="text-[10px] uppercase tracking-[0.4em] text-foreground/55">Floor Plan</p>
-      <p className="text-[10px] uppercase tracking-[0.32em] text-gold/80">
-        <span className="md:hidden">↔ Swipe to explore · Tap to select</span>
-        <span className="hidden md:inline">Tap a table to select</span>
+      <p className="text-[10px] uppercase tracking-[0.32em] text-[hsl(var(--neon-blue))]/85">
+        <span className="md:hidden">Pinch · Swipe · Tap</span>
+        <span className="hidden md:inline">Tap a table · Scroll to zoom</span>
       </p>
     </div>
 
