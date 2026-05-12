@@ -179,9 +179,10 @@
   50% { opacity: 1; filter: drop-shadow(0 0 4px hsl(19 70% 55% / 0.55)); }
 }
 @keyframes selected-pulse {
-  0%, 100% { filter: drop-shadow(0 0 8px hsl(var(--gold) / 0.7)); }
-  50% { filter: drop-shadow(0 0 16px hsl(var(--gold) / 1)); }
+  0%, 100% { filter: drop-shadow(0 0 8px hsl(var(--neon-blue) / 0.7)); }
+  50% { filter: drop-shadow(0 0 18px hsl(var(--neon-blue) / 1)); }
 }
+.animate-selected-pulse { animation: selected-pulse 1.6s ease-in-out infinite; }
 
 /* Hide scrollbars globally — native iOS feel */
 * {
