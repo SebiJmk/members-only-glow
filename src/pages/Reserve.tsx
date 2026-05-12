@@ -67,19 +67,38 @@ const Reserve = () => {
 
   return (
     <main
-      className="min-h-screen text-foreground pb-safe-nav"
+      className="relative min-h-screen text-foreground pb-safe-nav overflow-hidden"
       style={{ background: "#050505" }}
     >
+      {/* Centered purple-pink halo */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[900px] -z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 55% at 50% 30%, hsl(290 80% 45% / 0.28) 0%, hsl(330 90% 55% / 0.18) 35%, hsl(0 0% 4% / 0) 70%)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-[280px] h-[600px] w-[600px] rounded-full -z-0 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle, hsl(280 90% 50% / 0.18) 0%, hsl(0 0% 4% / 0) 70%)",
+        }}
+      />
+
+      <div className="relative z-10">
       <Navbar />
 
       {/* Title */}
-      <section className="container mx-auto px-6 pt-32 md:pt-40 pb-10 md:pb-14">
-        <div className="max-w-3xl">
+      <section className="container mx-auto px-6 pt-32 md:pt-40 pb-10 md:pb-14 text-center">
+        <div className="max-w-3xl mx-auto">
           <p className="text-xs uppercase tracking-[0.5em] text-primary mb-5">The Gates</p>
           <h1 className="font-display text-5xl md:text-7xl leading-[1.05]">
             Choose your <em className="text-neon-soft not-italic">table.</em>
           </h1>
-          <p className="mt-5 text-foreground/65 max-w-xl">
+          <p className="mt-5 text-foreground/65 max-w-xl mx-auto">
             Tap any seat on the floor plan. The room knows where you sit.
           </p>
         </div>
