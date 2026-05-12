@@ -309,10 +309,10 @@ const TableNode = ({
   onHover: (id: string | null) => void;
 }) => {
   const zone = zones[table.zone];
-  const color = selected ? "hsl(var(--gold))" : zone.stroke;
+  const color = selected ? "hsl(var(--neon-blue))" : zone.stroke;
 
   // Inner scale (around local origin 0,0) — never moves the group's translate.
-  const scale = selected ? 1.05 : hovered ? 1.03 : 1;
+  const scale = selected ? 1.06 : hovered ? 1.03 : 1;
 
   return (
     <g
