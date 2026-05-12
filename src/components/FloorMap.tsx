@@ -196,17 +196,13 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
     {/* Swipe-to-pan container — preserves true icon size on mobile */}
     <div className="relative">
       <div
-        className="overflow-x-auto overflow-y-hidden no-scrollbar -mx-1 px-1"
-        style={{
-          WebkitOverflowScrolling: "touch",
-          overscrollBehaviorX: "contain",
-          touchAction: "pan-x pan-y",
-        }}
+        className="-mx-1 px-1"
+        style={{ touchAction: "pinch-zoom" }}
       >
         <svg
           viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
           preserveAspectRatio="xMidYMid meet"
-          className="block h-auto select-none min-w-[900px] w-full md:min-w-0"
+          className="block h-auto select-none w-full"
           role="img"
           aria-label="Members Only floor plan with selectable tables"
         >
