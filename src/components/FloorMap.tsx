@@ -341,7 +341,7 @@ const TableNode = ({
           transformOrigin: "0 0",
           transformBox: "fill-box" as any,
           transition: "transform 220ms cubic-bezier(0.22, 1, 0.36, 1)",
-          filter: selected ? "url(#glow-gold)" : "url(#glow-sm)",
+          filter: selected ? "url(#glow-blue)" : "url(#glow-sm)",
           pointerEvents: "none",
         }}
       >
@@ -354,7 +354,7 @@ const TableNode = ({
         y={4}
         fontSize="13"
         fontWeight={700}
-        fill={selected ? "hsl(42 95% 75%)" : "hsl(0 0% 100% / 0.9)"}
+        fill={selected ? "hsl(205 100% 75%)" : "hsl(0 0% 100% / 0.9)"}
         style={{
           pointerEvents: "none",
           letterSpacing: "1px",
@@ -373,7 +373,7 @@ const LegendDot = ({ color, label, gold }: { color: string; label: string; gold?
       className="inline-block h-2 w-2 rounded-full"
       style={{
         background: color,
-        boxShadow: gold ? "0 0 8px hsl(var(--gold))" : `0 0 6px ${color}`,
+        boxShadow: gold ? "0 0 8px hsl(var(--neon-blue))" : `0 0 6px ${color}`,
       }}
     />
     {label}
