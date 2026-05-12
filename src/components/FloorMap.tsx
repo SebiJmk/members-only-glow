@@ -290,7 +290,7 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
       <LegendDot color="hsl(42 80% 65%)"   label="Gold · Bonsai" />
       <LegendDot color="hsl(0 100% 50%)"   label="Red · VIP" />
       <LegendDot color="hsl(19 60% 58%)"   label="Copper · Bar" />
-      <LegendDot color="hsl(var(--gold))"  label="Filled · Selected" gold />
+      <LegendDot color="hsl(var(--neon-blue))" label="Selected" gold />
     </div>
   </div>
 );
