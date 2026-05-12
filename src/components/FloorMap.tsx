@@ -188,25 +188,20 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
     <div className="flex items-center justify-between gap-3 px-2 mb-3 flex-wrap">
       <p className="text-[10px] uppercase tracking-[0.4em] text-foreground/55">Floor Plan</p>
       <p className="text-[10px] uppercase tracking-[0.32em] text-gold/80">
-        <span className="md:hidden">↔ Swipe to explore · Tap to select</span>
-        <span className="hidden md:inline">Tap a table to select</span>
+        Tap a table to select · pinch to zoom
       </p>
     </div>
 
     {/* Swipe-to-pan container — preserves true icon size on mobile */}
     <div className="relative">
       <div
-        className="overflow-x-auto overflow-y-hidden no-scrollbar -mx-1 px-1"
-        style={{
-          WebkitOverflowScrolling: "touch",
-          overscrollBehaviorX: "contain",
-          touchAction: "pan-x pan-y",
-        }}
+        className="-mx-1 px-1"
+        style={{ touchAction: "pinch-zoom" }}
       >
         <svg
           viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
           preserveAspectRatio="xMidYMid meet"
-          className="block h-auto select-none min-w-[900px] w-full md:min-w-0"
+          className="block h-auto select-none w-full"
           role="img"
           aria-label="Members Only floor plan with selectable tables"
         >
@@ -273,16 +268,6 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
           ))}
         </svg>
       </div>
-
-      {/* Right-edge fade hint — mobile only */}
-      <div
-        aria-hidden="true"
-        className="md:hidden pointer-events-none absolute top-0 right-0 h-full w-12 rounded-r-2xl"
-        style={{
-          background:
-            "linear-gradient(to left, hsl(0 0% 4% / 0.85) 0%, hsl(0 0% 4% / 0) 100%)",
-        }}
-      />
     </div>
 
     {/* Legend */}
