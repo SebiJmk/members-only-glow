@@ -194,96 +194,94 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
       </p>
     </div>
 
-    {/* Swipe-to-pan container — preserves true icon size on mobile */}
-    <div className="relative">
-      <div
-        className="overflow-x-auto overflow-y-hidden no-scrollbar -mx-1 px-1"
-        style={{
-          WebkitOverflowScrolling: "touch",
-          overscrollBehaviorX: "contain",
-          touchAction: "pan-x pan-y",
-        }}
+    {/* Pinch-zoom + swipe-to-pan canvas */}
+    <div className="relative rounded-xl overflow-hidden bg-[hsl(0_0%_3%)] border border-white/5">
+      <TransformWrapper
+        initialScale={1}
+        minScale={0.85}
+        maxScale={3}
+        centerOnInit
+        wheel={{ step: 0.1 }}
+        pinch={{ step: 5 }}
+        doubleClick={{ mode: "toggle", step: 1.5 }}
+        panning={{ velocityDisabled: false }}
       >
-        <svg
-          viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
-          preserveAspectRatio="xMidYMid meet"
-          className="block h-auto select-none min-w-[900px] w-full md:min-w-0"
-          role="img"
-          aria-label="Members Only floor plan with selectable tables"
+        <TransformComponent
+          wrapperClass="!w-full"
+          wrapperStyle={{ width: "100%", aspectRatio: `${VIEW_W} / ${VIEW_H}` }}
+          contentStyle={{ width: "100%", height: "100%" }}
         >
-          <defs>
-            <linearGradient id="gold-grad" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%"   stopColor="hsl(35 80% 60% / 0.55)" />
-              <stop offset="100%" stopColor="hsl(19 47% 53% / 0.55)" />
-            </linearGradient>
-            <linearGradient id="gold-grad-soft" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%"   stopColor="hsl(35 80% 60% / 0.35)" />
-              <stop offset="100%" stopColor="hsl(19 47% 53% / 0.35)" />
-            </linearGradient>
-            <linearGradient id="wood-grad" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%"   stopColor="hsl(25 40% 28%)" />
-              <stop offset="100%" stopColor="hsl(25 35% 18%)" />
-            </linearGradient>
-            <radialGradient id="bonsai-halo" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="hsl(42 90% 65% / 0.4)" />
-              <stop offset="100%" stopColor="hsl(42 90% 65% / 0)" />
-            </radialGradient>
-            <radialGradient id="vip-halo" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="hsl(0 100% 40% / 0.18)" />
-              <stop offset="100%" stopColor="hsl(0 100% 40% / 0)" />
-            </radialGradient>
-            <filter id="glow-sm" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="b" />
-              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
-            <filter id="glow-gold" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="5" result="b" />
-              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
-          </defs>
+          <svg
+            viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+            preserveAspectRatio="xMidYMid meet"
+            className="block w-full h-full select-none"
+            role="img"
+            aria-label="Members Only floor plan with selectable tables"
+          >
+            <defs>
+              <linearGradient id="gold-grad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%"   stopColor="hsl(205 100% 60% / 0.55)" />
+                <stop offset="100%" stopColor="hsl(205 100% 45% / 0.55)" />
+              </linearGradient>
+              <linearGradient id="gold-grad-soft" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%"   stopColor="hsl(205 100% 60% / 0.35)" />
+                <stop offset="100%" stopColor="hsl(205 100% 45% / 0.35)" />
+              </linearGradient>
+              <linearGradient id="wood-grad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%"   stopColor="hsl(25 40% 28%)" />
+                <stop offset="100%" stopColor="hsl(25 35% 18%)" />
+              </linearGradient>
+              <radialGradient id="bonsai-halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stopColor="hsl(42 90% 65% / 0.4)" />
+                <stop offset="100%" stopColor="hsl(42 90% 65% / 0)" />
+              </radialGradient>
+              <radialGradient id="vip-halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stopColor="hsl(0 100% 40% / 0.18)" />
+                <stop offset="100%" stopColor="hsl(0 100% 40% / 0)" />
+              </radialGradient>
+              <filter id="glow-sm" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="glow-blue" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="6" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
 
-          {/* Floor base */}
-          <rect x="10" y="10" width={VIEW_W - 20} height={VIEW_H - 20} rx="20"
-            fill="hsl(0 0% 4%)" stroke="hsl(0 0% 100% / 0.06)" strokeWidth="1" />
+            {/* Floor base */}
+            <rect x="10" y="10" width={VIEW_W - 20} height={VIEW_H - 20} rx="20"
+              fill="hsl(0 0% 4%)" stroke="hsl(0 0% 100% / 0.06)" strokeWidth="1" />
 
-          {/* Zone tints */}
-          <rect x="40"  y="40"  width="640" height="140" rx="16" fill="hsl(338 100% 62% / 0.04)" />
-          <rect x="710" y="200" width="150" height="400" rx="16" fill="url(#vip-halo)" />
-          <rect x="710" y="200" width="150" height="400" rx="16" fill="hsl(0 100% 27% / 0.07)" />
+            {/* Zone tints */}
+            <rect x="40"  y="40"  width="640" height="140" rx="16" fill="hsl(338 100% 62% / 0.04)" />
+            <rect x="710" y="200" width="150" height="400" rx="16" fill="url(#vip-halo)" />
+            <rect x="710" y="200" width="150" height="400" rx="16" fill="hsl(0 100% 27% / 0.07)" />
 
-          {/* Bar counter + bonsai */}
-          <CopperBarCounter />
-          <BonsaiIcon />
+            {/* Bar counter + bonsai */}
+            <CopperBarCounter />
+            <BonsaiIcon />
 
-          {/* Zone labels — placed only in dead-space */}
-          <text x="50"  y="34"  fill="hsl(338 100% 62% / 0.7)" fontSize="12" letterSpacing="5">NEON LOUNGE</text>
-          <text x="720" y="192" fill="hsl(0 100% 70% / 0.75)" fontSize="12" letterSpacing="5">VIP</text>
-          <text x="50"  y="580" fill="hsl(19 60% 65% / 0.8)"  fontSize="12" letterSpacing="5">COPPER BAR</text>
-          <text x="385" y="555" fill="hsl(42 80% 70% / 0.75)" fontSize="12" letterSpacing="5">THE BONSAI</text>
+            {/* Zone labels */}
+            <text x="50"  y="34"  fill="hsl(338 100% 62% / 0.7)" fontSize="12" letterSpacing="5">NEON LOUNGE</text>
+            <text x="720" y="192" fill="hsl(0 100% 70% / 0.75)" fontSize="12" letterSpacing="5">VIP</text>
+            <text x="50"  y="580" fill="hsl(19 60% 65% / 0.8)"  fontSize="12" letterSpacing="5">COPPER BAR</text>
+            <text x="385" y="555" fill="hsl(42 80% 70% / 0.75)" fontSize="12" letterSpacing="5">THE BONSAI</text>
 
-          {/* Tables */}
-          {tables.map((t) => (
-            <TableNode
-              key={t.id}
-              table={t}
-              selected={selected === t.id}
-              hovered={hovered === t.id}
-              onSelect={onSelect}
-              onHover={onHover}
-            />
-          ))}
-        </svg>
-      </div>
-
-      {/* Right-edge fade hint — mobile only */}
-      <div
-        aria-hidden="true"
-        className="md:hidden pointer-events-none absolute top-0 right-0 h-full w-12 rounded-r-2xl"
-        style={{
-          background:
-            "linear-gradient(to left, hsl(0 0% 4% / 0.85) 0%, hsl(0 0% 4% / 0) 100%)",
-        }}
-      />
+            {/* Tables */}
+            {tables.map((t) => (
+              <TableNode
+                key={t.id}
+                table={t}
+                selected={selected === t.id}
+                hovered={hovered === t.id}
+                onSelect={onSelect}
+                onHover={onHover}
+              />
+            ))}
+          </svg>
+        </TransformComponent>
+      </TransformWrapper>
     </div>
 
     {/* Legend */}
