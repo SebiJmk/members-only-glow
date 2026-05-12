@@ -1,4 +1,5 @@
 import { Table, ZoneId, tables, zones } from "@/data/floorplan";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 type Props = {
   selected: string | null;
