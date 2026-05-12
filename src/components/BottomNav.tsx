@@ -34,7 +34,7 @@ export const BottomNav = () => (
                 : undefined
             }
           >
-            <Icon className="h-4 w-4" strokeWidth={1.5} />
+            <Icon className="h-[18px] w-[18px]" strokeWidth={1.1} />
             <span>{label}</span>
           </NavLink>
         </li>

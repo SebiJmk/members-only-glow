@@ -1,4 +1,5 @@
 import { Table, ZoneId, tables, zones } from "@/data/floorplan";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 type Props = {
   selected: string | null;
@@ -187,102 +188,100 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
     {/* Header */}
     <div className="flex items-center justify-between gap-3 px-2 mb-3 flex-wrap">
       <p className="text-[10px] uppercase tracking-[0.4em] text-foreground/55">Floor Plan</p>
-      <p className="text-[10px] uppercase tracking-[0.32em] text-gold/80">
-        <span className="md:hidden">↔ Swipe to explore · Tap to select</span>
-        <span className="hidden md:inline">Tap a table to select</span>
+      <p className="text-[10px] uppercase tracking-[0.32em] text-[hsl(var(--neon-blue))]/85">
+        <span className="md:hidden">Pinch · Swipe · Tap</span>
+        <span className="hidden md:inline">Tap a table · Scroll to zoom</span>
       </p>
     </div>
 
-    {/* Swipe-to-pan container — preserves true icon size on mobile */}
-    <div className="relative">
-      <div
-        className="overflow-x-auto overflow-y-hidden no-scrollbar -mx-1 px-1"
-        style={{
-          WebkitOverflowScrolling: "touch",
-          overscrollBehaviorX: "contain",
-          touchAction: "pan-x pan-y",
-        }}
+    {/* Pinch-zoom + swipe-to-pan canvas */}
+    <div className="relative rounded-xl overflow-hidden bg-[hsl(0_0%_3%)] border border-white/5">
+      <TransformWrapper
+        initialScale={1}
+        minScale={0.85}
+        maxScale={3}
+        centerOnInit
+        wheel={{ step: 0.1 }}
+        pinch={{ step: 5 }}
+        doubleClick={{ mode: "toggle", step: 1.5 }}
+        panning={{ velocityDisabled: false }}
       >
-        <svg
-          viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
-          preserveAspectRatio="xMidYMid meet"
-          className="block h-auto select-none min-w-[900px] w-full md:min-w-0"
-          role="img"
-          aria-label="Members Only floor plan with selectable tables"
+        <TransformComponent
+          wrapperClass="!w-full"
+          wrapperStyle={{ width: "100%", aspectRatio: `${VIEW_W} / ${VIEW_H}` }}
+          contentStyle={{ width: "100%", height: "100%" }}
         >
-          <defs>
-            <linearGradient id="gold-grad" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%"   stopColor="hsl(35 80% 60% / 0.55)" />
-              <stop offset="100%" stopColor="hsl(19 47% 53% / 0.55)" />
-            </linearGradient>
-            <linearGradient id="gold-grad-soft" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%"   stopColor="hsl(35 80% 60% / 0.35)" />
-              <stop offset="100%" stopColor="hsl(19 47% 53% / 0.35)" />
-            </linearGradient>
-            <linearGradient id="wood-grad" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%"   stopColor="hsl(25 40% 28%)" />
-              <stop offset="100%" stopColor="hsl(25 35% 18%)" />
-            </linearGradient>
-            <radialGradient id="bonsai-halo" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="hsl(42 90% 65% / 0.4)" />
-              <stop offset="100%" stopColor="hsl(42 90% 65% / 0)" />
-            </radialGradient>
-            <radialGradient id="vip-halo" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"   stopColor="hsl(0 100% 40% / 0.18)" />
-              <stop offset="100%" stopColor="hsl(0 100% 40% / 0)" />
-            </radialGradient>
-            <filter id="glow-sm" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="b" />
-              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
-            <filter id="glow-gold" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="5" result="b" />
-              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
-          </defs>
+          <svg
+            viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+            preserveAspectRatio="xMidYMid meet"
+            className="block w-full h-full select-none"
+            role="img"
+            aria-label="Members Only floor plan with selectable tables"
+          >
+            <defs>
+              <linearGradient id="gold-grad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%"   stopColor="hsl(205 100% 60% / 0.55)" />
+                <stop offset="100%" stopColor="hsl(205 100% 45% / 0.55)" />
+              </linearGradient>
+              <linearGradient id="gold-grad-soft" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%"   stopColor="hsl(205 100% 60% / 0.35)" />
+                <stop offset="100%" stopColor="hsl(205 100% 45% / 0.35)" />
+              </linearGradient>
+              <linearGradient id="wood-grad" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%"   stopColor="hsl(25 40% 28%)" />
+                <stop offset="100%" stopColor="hsl(25 35% 18%)" />
+              </linearGradient>
+              <radialGradient id="bonsai-halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stopColor="hsl(42 90% 65% / 0.4)" />
+                <stop offset="100%" stopColor="hsl(42 90% 65% / 0)" />
+              </radialGradient>
+              <radialGradient id="vip-halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stopColor="hsl(0 100% 40% / 0.18)" />
+                <stop offset="100%" stopColor="hsl(0 100% 40% / 0)" />
+              </radialGradient>
+              <filter id="glow-sm" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="glow-blue" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="6" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
 
-          {/* Floor base */}
-          <rect x="10" y="10" width={VIEW_W - 20} height={VIEW_H - 20} rx="20"
-            fill="hsl(0 0% 4%)" stroke="hsl(0 0% 100% / 0.06)" strokeWidth="1" />
+            {/* Floor base */}
+            <rect x="10" y="10" width={VIEW_W - 20} height={VIEW_H - 20} rx="20"
+              fill="hsl(0 0% 4%)" stroke="hsl(0 0% 100% / 0.06)" strokeWidth="1" />
 
-          {/* Zone tints */}
-          <rect x="40"  y="40"  width="640" height="140" rx="16" fill="hsl(338 100% 62% / 0.04)" />
-          <rect x="710" y="200" width="150" height="400" rx="16" fill="url(#vip-halo)" />
-          <rect x="710" y="200" width="150" height="400" rx="16" fill="hsl(0 100% 27% / 0.07)" />
+            {/* Zone tints */}
+            <rect x="40"  y="40"  width="640" height="140" rx="16" fill="hsl(338 100% 62% / 0.04)" />
+            <rect x="710" y="200" width="150" height="400" rx="16" fill="url(#vip-halo)" />
+            <rect x="710" y="200" width="150" height="400" rx="16" fill="hsl(0 100% 27% / 0.07)" />
 
-          {/* Bar counter + bonsai */}
-          <CopperBarCounter />
-          <BonsaiIcon />
+            {/* Bar counter + bonsai */}
+            <CopperBarCounter />
+            <BonsaiIcon />
 
-          {/* Zone labels — placed only in dead-space */}
-          <text x="50"  y="34"  fill="hsl(338 100% 62% / 0.7)" fontSize="12" letterSpacing="5">NEON LOUNGE</text>
-          <text x="720" y="192" fill="hsl(0 100% 70% / 0.75)" fontSize="12" letterSpacing="5">VIP</text>
-          <text x="50"  y="580" fill="hsl(19 60% 65% / 0.8)"  fontSize="12" letterSpacing="5">COPPER BAR</text>
-          <text x="385" y="555" fill="hsl(42 80% 70% / 0.75)" fontSize="12" letterSpacing="5">THE BONSAI</text>
+            {/* Zone labels */}
+            <text x="50"  y="34"  fill="hsl(338 100% 62% / 0.7)" fontSize="12" letterSpacing="5">NEON LOUNGE</text>
+            <text x="720" y="192" fill="hsl(0 100% 70% / 0.75)" fontSize="12" letterSpacing="5">VIP</text>
+            <text x="50"  y="580" fill="hsl(19 60% 65% / 0.8)"  fontSize="12" letterSpacing="5">COPPER BAR</text>
+            <text x="385" y="555" fill="hsl(42 80% 70% / 0.75)" fontSize="12" letterSpacing="5">THE BONSAI</text>
 
-          {/* Tables */}
-          {tables.map((t) => (
-            <TableNode
-              key={t.id}
-              table={t}
-              selected={selected === t.id}
-              hovered={hovered === t.id}
-              onSelect={onSelect}
-              onHover={onHover}
-            />
-          ))}
-        </svg>
-      </div>
-
-      {/* Right-edge fade hint — mobile only */}
-      <div
-        aria-hidden="true"
-        className="md:hidden pointer-events-none absolute top-0 right-0 h-full w-12 rounded-r-2xl"
-        style={{
-          background:
-            "linear-gradient(to left, hsl(0 0% 4% / 0.85) 0%, hsl(0 0% 4% / 0) 100%)",
-        }}
-      />
+            {/* Tables */}
+            {tables.map((t) => (
+              <TableNode
+                key={t.id}
+                table={t}
+                selected={selected === t.id}
+                hovered={hovered === t.id}
+                onSelect={onSelect}
+                onHover={onHover}
+              />
+            ))}
+          </svg>
+        </TransformComponent>
+      </TransformWrapper>
     </div>
 
     {/* Legend */}
@@ -291,7 +290,7 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
       <LegendDot color="hsl(42 80% 65%)"   label="Gold · Bonsai" />
       <LegendDot color="hsl(0 100% 50%)"   label="Red · VIP" />
       <LegendDot color="hsl(19 60% 58%)"   label="Copper · Bar" />
-      <LegendDot color="hsl(var(--gold))"  label="Filled · Selected" gold />
+      <LegendDot color="hsl(var(--neon-blue))" label="Selected" gold />
     </div>
   </div>
 );
@@ -310,10 +309,10 @@ const TableNode = ({
   onHover: (id: string | null) => void;
 }) => {
   const zone = zones[table.zone];
-  const color = selected ? "hsl(var(--gold))" : zone.stroke;
+  const color = selected ? "hsl(var(--neon-blue))" : zone.stroke;
 
   // Inner scale (around local origin 0,0) — never moves the group's translate.
-  const scale = selected ? 1.05 : hovered ? 1.03 : 1;
+  const scale = selected ? 1.06 : hovered ? 1.03 : 1;
 
   return (
     <g
@@ -342,7 +341,7 @@ const TableNode = ({
           transformOrigin: "0 0",
           transformBox: "fill-box" as any,
           transition: "transform 220ms cubic-bezier(0.22, 1, 0.36, 1)",
-          filter: selected ? "url(#glow-gold)" : "url(#glow-sm)",
+          filter: selected ? "url(#glow-blue)" : "url(#glow-sm)",
           pointerEvents: "none",
         }}
       >
@@ -355,7 +354,7 @@ const TableNode = ({
         y={4}
         fontSize="13"
         fontWeight={700}
-        fill={selected ? "hsl(42 95% 75%)" : "hsl(0 0% 100% / 0.9)"}
+        fill={selected ? "hsl(205 100% 75%)" : "hsl(0 0% 100% / 0.9)"}
         style={{
           pointerEvents: "none",
           letterSpacing: "1px",
@@ -374,7 +373,7 @@ const LegendDot = ({ color, label, gold }: { color: string; label: string; gold?
       className="inline-block h-2 w-2 rounded-full"
       style={{
         background: color,
-        boxShadow: gold ? "0 0 8px hsl(var(--gold))" : `0 0 6px ${color}`,
+        boxShadow: gold ? "0 0 8px hsl(var(--neon-blue))" : `0 0 6px ${color}`,
       }}
     />
     {label}

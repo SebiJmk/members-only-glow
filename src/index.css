@@ -37,6 +37,8 @@
 
     /* Brand tokens */
     --neon-pink: 338 100% 62%;
+    --neon-blue: 205 100% 58%;        /* MEMBERS sign electric blue */
+    --neon-red: 8 95% 58%;            /* MEMBERS sign red/orange accent */
     --deep-green: 130 50% 8%;
     --copper: 19 47% 53%;
     --copper-glow: 30 60% 65%;
@@ -53,6 +55,7 @@
     --glow-neon: 0 0 8px hsl(var(--neon-pink) / 0.9), 0 0 24px hsl(var(--neon-pink) / 0.6), 0 0 60px hsl(var(--neon-pink) / 0.35);
     --glow-neon-soft: 0 0 12px hsl(var(--neon-pink) / 0.55), 0 0 40px hsl(var(--neon-pink) / 0.3);
     --glow-gold: 0 0 14px hsl(var(--gold) / 0.7), 0 0 40px hsl(var(--gold) / 0.35);
+    --glow-blue: 0 0 10px hsl(var(--neon-blue) / 0.85), 0 0 28px hsl(var(--neon-blue) / 0.55), 0 0 60px hsl(var(--neon-blue) / 0.3);
     --shadow-elegant: 0 30px 80px -20px hsl(0 0% 0% / 0.7);
 
     --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
@@ -176,9 +179,10 @@
   50% { opacity: 1; filter: drop-shadow(0 0 4px hsl(19 70% 55% / 0.55)); }
 }
 @keyframes selected-pulse {
-  0%, 100% { filter: drop-shadow(0 0 8px hsl(var(--gold) / 0.7)); }
-  50% { filter: drop-shadow(0 0 16px hsl(var(--gold) / 1)); }
+  0%, 100% { filter: drop-shadow(0 0 8px hsl(var(--neon-blue) / 0.7)); }
+  50% { filter: drop-shadow(0 0 18px hsl(var(--neon-blue) / 1)); }
 }
+.animate-selected-pulse { animation: selected-pulse 1.6s ease-in-out infinite; }
 
 /* Hide scrollbars globally — native iOS feel */
 * {

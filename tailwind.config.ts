@@ -48,6 +48,8 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         neon: "hsl(var(--neon-pink))",
+        "neon-blue": "hsl(var(--neon-blue))",
+        "neon-red": "hsl(var(--neon-red))",
         copper: "hsl(var(--copper))",
         "copper-glow": "hsl(var(--copper-glow))",
         gold: "hsl(var(--gold))",
