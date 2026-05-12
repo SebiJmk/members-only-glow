@@ -268,16 +268,6 @@ export const FloorMap = ({ selected, onSelect, hovered, onHover }: Props) => (
           ))}
         </svg>
       </div>
-
-      {/* Right-edge fade hint — mobile only */}
-      <div
-        aria-hidden="true"
-        className="md:hidden pointer-events-none absolute top-0 right-0 h-full w-12 rounded-r-2xl"
-        style={{
-          background:
-            "linear-gradient(to left, hsl(0 0% 4% / 0.85) 0%, hsl(0 0% 4% / 0) 100%)",
-        }}
-      />
     </div>
 
     {/* Legend */}
