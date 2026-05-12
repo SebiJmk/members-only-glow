@@ -311,10 +311,81 @@ const Reserve = () => {
             </form>
           </aside>
         </div>
+
+        {/* TABLE GRID — one card per individual table */}
+        <div className="mt-20 md:mt-28">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <p className="text-[10px] uppercase tracking-[0.5em] text-primary mb-3">All tables</p>
+            <h2 className="font-display text-3xl md:text-4xl">Browse every seat in the room.</h2>
+            <p className="mt-3 text-sm text-foreground/60">
+              Tap a card to hold that table. Each one keeps the vibe of its zone.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {tables.map((t) => {
+              const z = zones[t.zone];
+              const isSelected = selected === t.id;
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => {
+                    setSelected(t.id);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  onMouseEnter={() => setHovered(t.id)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="group relative text-left rounded-2xl overflow-hidden glass transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    border: isSelected
+                      ? "1px solid hsl(var(--gold) / 0.8)"
+                      : "1px solid hsl(0 0% 100% / 0.08)",
+                    boxShadow: isSelected ? "var(--glow-gold)" : undefined,
+                  }}
+                >
+                  <div
+                    className="h-2 w-full"
+                    style={{ background: z.stroke }}
+                    aria-hidden="true"
+                  />
+                  <div className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span
+                        className="font-display text-2xl"
+                        style={{ color: isSelected ? "hsl(var(--gold))" : z.stroke }}
+                      >
+                        {t.label}
+                      </span>
+                      <span className="text-[9px] uppercase tracking-[0.3em] text-foreground/50">
+                        Seats {t.seats}
+                      </span>
+                    </div>
+                    <p
+                      className="text-[9px] uppercase tracking-[0.35em] mb-2"
+                      style={{ color: z.stroke }}
+                    >
+                      {z.name}
+                    </p>
+                    <p className="text-xs text-foreground/65 leading-relaxed line-clamp-3">
+                      {z.description}
+                    </p>
+                    {isSelected && (
+                      <p className="mt-3 text-[9px] uppercase tracking-[0.4em] text-gold">
+                        ✦ Held
+                      </p>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       <Footer />
       <BottomNav />
+      </div>
     </main>
   );
 };
